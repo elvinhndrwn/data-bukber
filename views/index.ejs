@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pembayaran Bukber</title>
+</head>
+<body>
+
+    <h2>Bukber Pepe Permai</h2>
+
+    <!-- form submit -->
+    <form action="/members" method="post">
+        <input type="text" name="name" placeholder="nama..." required>
+        <button type="submit">Simpan</button>
+    </form>
+    <!-- end form submit -->
+
+    <table border="1" style="margin-top: 20px; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th style="padding: 10px;">Nama</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let counter=1; %>
+            <% members.forEach(function(m){ %>
+                <tr>
+                    <td><%= counter++ %></td>
+                    <td><%= m.name %></td>
+                    <td><a href="/members/delete/<%= m.id %>">Hapus</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    
+    
+</body>
+</html>
