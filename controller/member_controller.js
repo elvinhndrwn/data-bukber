@@ -36,9 +36,11 @@ module.exports = {
 
     delete: async (req, res) => {
         try{
-            res.json({
-                "msg" : "comming soon"
-            })
+            const { id } = req.params;
+            const query = 'DELETE FROM member WHERE id = $1 ';
+            await db.query(query, [id]);
+
+            res.redirect('/')
 
         }catch (error) {
             console.error('Query error', error.message);
