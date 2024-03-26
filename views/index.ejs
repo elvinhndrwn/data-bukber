@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Data Pembayaran Bukber</title>
 </head>
 <body>
@@ -17,11 +18,16 @@
     <!-- end form submit -->
 
     <table border="1" style="margin-top: 20px; border-collapse: collapse;">
+        <p>Total uang: <b id="total"><%= total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' }); %></b></p>
         <thead>
             <tr>
-                <th>No</th>
-                <th style="padding: 10px;">Nama</th>
-                <th>Aksi</th>
+                <th rowspan="2">No</th>
+                <th rowspan="2" style="padding: 10px;">Nama</th>
+                <th colspan="2">Aksi</th>
+            </tr>
+            <tr>
+                <th colspan="1">Lunas</th>
+                <th colspan="1">Hapus</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +36,16 @@
                 <tr>
                     <td><%= counter++ %></td>
                     <td><%= m.name %></td>
-                    <td><a href="/members/delete/<%= m.id %>">Hapus</a></td>
+                    <td>
+                        <% if(m.is_paid){ %>
+                            -
+                        <% }else{ %>
+                            <a href="/members/update-payment/<%= m.id %>"><i class="fa fa-check" style="font-size:24px;color:green"></i></a>
+                        <% }; %>
+                    </td>
+                    <td>
+                        <a href="/members/delete/<%= m.id %>"><i class="fa fa-trash-o" style="font-size:24px;color:red"></i></a>
+                    </td>
                 </tr>
             <% }); %>
         </tbody>
