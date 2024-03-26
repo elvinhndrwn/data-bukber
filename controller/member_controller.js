@@ -7,11 +7,14 @@ module.exports = {
         try{
             const query = 'SELECT * FROM member ORDER BY name';
             const members = await db.query(query); 
-            // res.json(result.rows);
+
+            const count_paid_query = 'SELECT COUNT(id) FROM member WHERE is_paid = true';
+            const paid = await db.query(count_paid_query); 
+            const count_paid = paid.rows[0].count;
 
             res.render('index', {
                 members : members.rows,
-                total : members.rowCount * 25000
+                total : count_paid * 25000
             });
 
         }catch (error) {
